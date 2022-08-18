@@ -31,4 +31,4 @@ function initSlice(url, div) {
     }
 }
 
-initSlice('assets/tiles.png', 'sliceImages');
+initSlice('assets/tiles.fixed.png', 'sliceImages');
