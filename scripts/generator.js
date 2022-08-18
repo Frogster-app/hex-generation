@@ -15,6 +15,40 @@ const GRID_Y_OFFSET = GRID_Y_SPACE * 0.5;
 const COLS = "#fff"
 const rndItem = arr => arr[Math.random() * arr.length | 0];
 
+function createTiles(image, tiles = []) {
+    const img = new Image();
+    img.src = image;
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+    for (let y = 0; y < img.height; y += 332) {
+        for (let x = 0; x < img.width; x += 221) {
+            const tile = ctx.getImageData(x, y, 221, 332);
+            tiles.push(tile);
+        }
+    }
+    return tiles;
+}
+
+drawTiles(createTiles('assets/Tiles.png', []));
+
+function imageDataToBase64(imageData) {
+    return btoa(
+        new Uint8Array(imageData.data)
+        .reduce((data, byte) => data + String.fromCharCode(byte), '')
+    );
+}
+
+function drawTiles(tiles) {
+    tiles.forEach(tile => {
+        image = imageDataToBase64(tile);
+        console.log(image);
+    });
+}
+
+
 drawGrid(1, 1, 15, 13, createPoly(EDGES));
 
 function drawGrid(x, y, w, h, points) {
