@@ -32,7 +32,7 @@ function createTiles(image, tiles = []) {
     return tiles;
 }
 
-
+initSlice('assets/tiles.png', 'sliceImages')
 drawGrid(1, 1, 15, 13, createPoly(EDGES));
 
 function drawGrid(x, y, w, h, points) {
