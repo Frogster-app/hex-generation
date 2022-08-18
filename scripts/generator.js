@@ -32,22 +32,6 @@ function createTiles(image, tiles = []) {
     return tiles;
 }
 
-drawTiles(createTiles('assets/Tiles.png', []));
-
-function imageDataToBase64(imageData) {
-    return btoa(
-        new Uint8Array(imageData.data)
-        .reduce((data, byte) => data + String.fromCharCode(byte), '')
-    );
-}
-
-function drawTiles(tiles) {
-    tiles.forEach(tile => {
-        image = imageDataToBase64(tile);
-        console.log(image);
-    });
-}
-
 
 drawGrid(1, 1, 15, 13, createPoly(EDGES));
 
