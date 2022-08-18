@@ -4,14 +4,15 @@ const P2 = (x, y) => ({
     x,
     y
 });
+
 const EDGES = 6;
-const RADIUS = 20;
+const RADIUS = 30;
 const TAU = 2 * Math.PI;
 const EDGE_LEN = Math.sin(Math.PI / EDGES) * RADIUS * 2;
 const GRID_Y_SPACE = Math.cos(Math.PI / EDGES) * RADIUS * 2;
 const GRID_X_SPACE = RADIUS * 2 - EDGE_LEN * 0.5;
 const GRID_Y_OFFSET = GRID_Y_SPACE * 0.5;
-const COLS = "=#3c2f18,#01335f,#3f0e77,#204a73,#511d94,#fe1f00,#0060fd,#fe7603,#f0ca1d,#b085e8,#e9cafa".split(",");
+const COLS = "#fff"
 const rndItem = arr => arr[Math.random() * arr.length | 0];
 
 drawGrid(1, 1, 15, 13, createPoly(EDGES));
@@ -34,7 +35,7 @@ function gridToPixel(gx, gy, p = {}) {
 }
 
 function drawPoly(p, points) { // p.x, p.y is center
-    ctx.setTransform(1, 0, 0, 1, p.x, p.y);
+    ctx.setTransform(0.9, 0, 0, 0.9, p.x, p.y);
     var i = 0;
     ctx.beginPath();
     while (i < points.length) {
