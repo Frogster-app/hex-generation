@@ -1,6 +1,6 @@
 var image = new Image();
 image.onload = cutImageUp;
-image.src = 'assets/tiles.png';
+image.src = 'assets/tiles.fixed.png';
 
 numColsToCut = 38;
 numRowsToCut = 1;
