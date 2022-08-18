@@ -30,3 +30,5 @@ function initSlice(url, div) {
         })
     }
 }
+
+initSlice('assets/tiles.png', 'sliceImages');
