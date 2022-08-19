@@ -25,6 +25,18 @@ function clearCanvas() {
     document.getElementById("honeyStorage").appendChild(honeycombReplacement);
 }
 
+document.getElementById('heatmap-matrix-btn').addEventListener('click', function() {
+    if (document.getElementById('heatmap-matrix-btn').innerHTML == 'view') {
+        var heatmap = generateHeatmap(seed, width, height)
+        document.getElementById('heatmap-matrix').appendChild(document.createElement('pre')).innerHTML = JSON.stringify(heatmap, null, 2);
+        document.getElementById('heatmap-matrix-btn').innerHTML = 'hide';
+    } else {
+        document.getElementById('heatmap-matrix').getElementsByTagName('pre')[0].remove();
+        document.getElementById('heatmap-matrix-btn').innerHTML = 'view';
+    }
+
+})
+
 document.getElementById('refresh-map').addEventListener('click', function() {
     seed = CryptoJS.MD5(new Date().toLocaleTimeString());
 
@@ -39,13 +51,32 @@ document.getElementById('refresh-map').addEventListener('click', function() {
 
     clearCanvas();
 
-    init(heatmapCondenced, false);
+    init(heatmapCondenced, 1);
     debug(heatmapCondenced.join(','));
 })
 
 document.getElementById('display-text').addEventListener('click', function() {
 
     document.getElementById('display-text').style.display = 'none';
+    document.getElementById('display-value').style.display = 'inline-block';
+
+    var heatmap = generateHeatmap(seed, width, height)
+    let heatmapCondenced = [];
+
+    heatmap.forEach(element => {
+        element.forEach(height => {
+            heatmapCondenced.push(height);
+        });
+    });
+
+    clearCanvas();
+
+    init(heatmapCondenced, 2);
+})
+
+document.getElementById('display-value').addEventListener('click', function() {
+
+    document.getElementById('display-value').style.display = 'none';
     document.getElementById('display-layer').style.display = 'inline-block';
 
     var heatmap = generateHeatmap(seed, width, height)
@@ -59,7 +90,7 @@ document.getElementById('display-text').addEventListener('click', function() {
 
     clearCanvas();
 
-    init(heatmapCondenced, true);
+    init(heatmapCondenced, 3);
 })
 
 document.getElementById('display-layer').addEventListener('click', function() {
@@ -78,7 +109,7 @@ document.getElementById('display-layer').addEventListener('click', function() {
 
     clearCanvas();
 
-    init(heatmapCondenced, false);
+    init(heatmapCondenced, 1);
 })
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -95,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log(heatmapCondenced);
     /* init map generation */
-    image.onload = init(heatmapCondenced, false);
+    image.onload = init(heatmapCondenced, 1);
     image.src = 'assets/tiles.fixed.png';
     /* init debug */
     debug(heatmapCondenced.join(','));

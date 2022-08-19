@@ -3,21 +3,10 @@ const RADIUS = 30,
     GRID_Y_SPACE = 60 * Math.cos(Math.PI / 6),
     GRID_X_SPACE = 60 - .5 * EDGE_LEN,
     GRID_Y_OFFSET = .5 * GRID_Y_SPACE,
-    P2 = (a, b) => ({x: a,y: b});
+    P2 = (a, b) => ({ x: a, y: b });
 
-let canvas='',
-    ctx='';
-
-function applyBiome(e) {
-    // these thresholds will need tuning to match your generator
-    if (e < 0.1) return ['#d4f1f9', 'Water'];
-    else if (e < 0.2) return ['#f7e4c7', 'Beach'];
-    else if (e < 0.3) return ['#7CFC00', 'Forest'];
-    else if (e < 0.5) return ['#28a683', 'Jungle'];
-    else if (e < 0.7) return ['#739a6d', 'Savannah'];
-    else if (e < 0.9) return ['#FAD5A5', 'Dessert'];
-    else return ['#fffafa', 'Snow'];
-};
+let canvas = '',
+    ctx = '';
 
 function drawGrid(x, y, w, h, points, heatmap, stroke) {
     const p = P2();
@@ -52,11 +41,14 @@ function drawPoly(p, points, index, heatmap, stroke) {
     ctx.strokeStyle = applyBiome(heatmap[index])[0]
     ctx.closePath();
 
-    if (stroke) {
+    if (stroke == 1) {
+        ctx.fill();
+    } else if (stroke == 2) {
         ctx.fillText(applyBiome(heatmap[index])[1], -23, 1);
         ctx.stroke();
-    } else { 
-        ctx.fill();
+    } else if (stroke == 3) {
+        ctx.fillText(heatmap[index].toString().slice(0, 8), -23, 1);
+        ctx.stroke();
     }
 };
 
@@ -74,6 +66,6 @@ function createPoly(sides, points = []) {
 
 function init(heatmap, stroke) {
     canvas = document.getElementById("honeycomb"),
-    ctx = canvas.getContext("2d"),
-    drawGrid(1, 1, 15, 13, createPoly(6), heatmap, stroke);
+        ctx = canvas.getContext("2d"),
+        drawGrid(1, 1, 15, 13, createPoly(6), heatmap, stroke);
 };

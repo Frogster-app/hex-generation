@@ -1,78 +1,109 @@
 /* compiled from style.scss */
+
 @import "https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap";
 body {
-  display: flex;
-  flex-direction: column;
-  background-color: #333333;
-  color: white;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    background-color: #333333;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
 }
+
 body a {
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: white;
 }
+
 body a.green {
-  color: #99f375;
+    color: #99f375;
 }
-body .tiles, body .map, body .debug, body .heading {
-  width: 720px;
-  margin: auto;
+
+body .tiles,
+body .map,
+body .debug,
+body .heading {
+    width: 720px;
+    margin: auto;
 }
+
 body .map .title {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
+}
+
 body h2 span {
     opacity: 0.5;
     font-size: 20px;
 }
+
 body .map .title button {
     background-color: transparent;
     border: none;
     color: white;
     cursor: pointer;
 }
+
 body .map .title button svg {
     height: 20px;
     float: right;
 }
+
 body #sliceImages img {
-  width: 50px;
-  padding: 10px;
+    width: 50px;
+    padding: 10px;
 }
+
 body .tiles img {
     width: 100%;
 }
+
 body canvas {
-  width: 720px;
-  margin: auto;
+    width: 720px;
+    margin: auto;
 }
-body .debug, body .tiles {
+
+body .debug,
+body .tiles {
     padding-top: 20px;
     margin-top: 20px;
     border-top: 3px solid white;
 }
+
 body .debug p {
     font-weight: 700;
 }
+
 body .debug p span {
     opacity: 0.5;
 }
+
+body .debug p button {
+    background-color: transparent;
+    border: none;
+    color: #99f375;
+    cursor: pointer;
+}
+
+body .debug p pre {
+    opacity: 0.5;
+}
+
 body .heading p {
     padding-left: 10px;
     border-left: 3px solid #99f375;
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
 }
+
 body .map .title button#refresh-map:hover {
-  animation: spin 1s infinite;
+    animation: spin 1s infinite;
 }
