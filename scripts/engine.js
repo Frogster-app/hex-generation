@@ -28,7 +28,7 @@ function clearCanvas() {
 document.getElementById('refresh-map').addEventListener('click', function() {
     seed = CryptoJS.MD5(new Date().toLocaleTimeString());
 
-    var heatmap = generateHeatmap(seed, width , height)
+    var heatmap = generateHeatmap(seed, width, height)
     let heatmapCondenced = [];
 
     heatmap.forEach(element => {
@@ -39,13 +39,16 @@ document.getElementById('refresh-map').addEventListener('click', function() {
 
     clearCanvas();
 
-    init(heatmapCondenced);
+    init(heatmapCondenced, false);
     debug(heatmapCondenced.join(','));
 })
 
 document.getElementById('display-text').addEventListener('click', function() {
 
-    var heatmap = generateHeatmap(seed, width , height)
+    document.getElementById('display-text').style.display = 'none';
+    document.getElementById('display-layer').style.display = 'inline-block';
+
+    var heatmap = generateHeatmap(seed, width, height)
     let heatmapCondenced = [];
 
     heatmap.forEach(element => {
@@ -55,13 +58,32 @@ document.getElementById('display-text').addEventListener('click', function() {
     });
 
     clearCanvas();
-    
+
     init(heatmapCondenced, true);
+})
+
+document.getElementById('display-layer').addEventListener('click', function() {
+
+    document.getElementById('display-layer').style.display = 'none';
+    document.getElementById('display-text').style.display = 'inline-block';
+
+    var heatmap = generateHeatmap(seed, width, height)
+    let heatmapCondenced = [];
+
+    heatmap.forEach(element => {
+        element.forEach(height => {
+            heatmapCondenced.push(height);
+        });
+    });
+
+    clearCanvas();
+
+    init(heatmapCondenced, false);
 })
 
 document.addEventListener('DOMContentLoaded', function() {
     /* generate heatmap */
-    var heatmap = generateHeatmap(seed, width , height)
+    var heatmap = generateHeatmap(seed, width, height)
 
     let heatmapCondenced = [];
 
