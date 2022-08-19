@@ -1,20 +1,6 @@
 var image = new Image();
-image.onload = cutImageUp;
+image.onload = init;
 image.src = 'assets/tiles.fixed.png';
-
-numColsToCut = 38;
-numRowsToCut = 1;
-
-widthOfOnePiece = 221;
-heightOfOnePiece = 332;
-
-
-const ctx = canvas.getContext('2d');
-
-const P2 = (x, y) => ({
-    x,
-    y
-});
 
 const EDGES = 6;
 const RADIUS = 30;
@@ -23,15 +9,24 @@ const EDGE_LEN = Math.sin(Math.PI / EDGES) * RADIUS * 2;
 const GRID_Y_SPACE = Math.cos(Math.PI / EDGES) * RADIUS * 2;
 const GRID_X_SPACE = RADIUS * 2 - EDGE_LEN * 0.5;
 const GRID_Y_OFFSET = GRID_Y_SPACE * 0.5;
-const COLS = "#fff"
+const COLS = "#ffffff"
 const rndItem = arr => arr[Math.random() * arr.length | 0];
-
+const numColsToCut = 38;
+const numRowsToCut = 1;
+const widthOfOnePiece = 221;
+const heightOfOnePiece = 332;
+const ctx = canvas.getContext('2d');
+const P2 = (x, y) => ({
+    x,
+    y
+});
 
 function drawGrid(x, y, w, h, points, imagePieces) {
     const p = P2();
     var gy, gx;
     for (gy = y; gy < y + h; gy++) {
         for (gx = x; gx < x + w; gx++) {
+            ctx.strokeStyle = COLS
             drawPoly(gridToPixel(gx, gy, p), points, imagePieces);
         }
     }
@@ -54,28 +49,15 @@ function drawPoly(p, points, imagePieces) {
     }
     ctx.closePath();
 
-    var img = new Image();
+    /* var img = new Image();
     img.src = rndItem(imagePieces);
 
     img.onload = function() {
         var pattern = ctx.createPattern(img, "no-repeat");
         ctx.fillStyle = pattern;
         ctx.fill();
-    }
-
+    } */
     ctx.stroke();
-
-    /*  var img = new Image();
-     img.src = rndItem(imagePieces);
-
-     img.onload = function() {
-         var i = 0;
-         while (i < points.length) {
-             const p2 = points[i++];
-             ctx.drawImage(img, 1, 1, 30, 30, p2.x, p2.y);
-         }
-     } */
-
 }
 
 function createPoly(sides, points = []) {
@@ -90,7 +72,7 @@ function createPoly(sides, points = []) {
 }
 
 
-function cutImageUp() {
+function init() {
     var imagePieces = [];
     for (var x = 0; x < numColsToCut; ++x) {
         for (var y = 0; y < numRowsToCut; ++y) {

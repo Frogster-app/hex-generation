@@ -7,22 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HexGeneration</title>
     <link rel="canonical" href="https://github.com/Frogster-app/HexGeneration">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<style>
-    img {
-        padding: 10px;
-    }
-</style>
-
 <body>
-
-    <canvas id="canvas" width="750" height="750"></canvas>
-    <hr>
-    <div id="sliceImages">
-
+    <div class="heading">
+        <h1> <a href="https://github.com/Frogster-app" class="green">Frogster-app</a> / <a href="https://github.com/Frogster-app/HexGeneration">HexGeneration</a></h1>
+        <p>This project is used in Frogster to generate the map, it works by creating a honeycomb grid populated with 6 sides polygons (hexagon), using terrain generation we can create biomes and terrain seamlessly.</p>
     </div>
-
+    <h2>Map</h2>
+    <canvas id="canvas" width="720" height="750"></canvas>
+    <h2>Tiles</h2>
+    <div id="sliceImages"></div>
 </body>
 
 <script src="scripts/slice.js"></script>
