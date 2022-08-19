@@ -2,22 +2,62 @@ import { generateHeatmap } from './modules/heatmap.js';
 
 var image = new Image();
 
-const seed = CryptoJS.MD5(new Date().toLocaleTimeString());
+let seed = CryptoJS.MD5(new Date().toLocaleTimeString());
 const width = 15;
 const height = 13;
 
 function debug(heatmap) {
-    var p = document.createElement('p');
+    var p = document.getElementById('seed');
     p.innerHTML = `seed: <span>${seed}</span>`;
-    document.getElementById('debug').appendChild(p);
 
-    /* checksum */
-    var hash = CryptoJS.MD5(heatmap);
-    var p = document.createElement('p');
-    p.innerHTML = `checksum: <span>${hash}</span>`;
-    document.getElementById('debug').appendChild(p);
-
+    var p = document.getElementById('checksum');
+    p.innerHTML = `checksum: <span>${CryptoJS.MD5(heatmap)}</span>`;
 }
+
+function clearCanvas() {
+    var honeycomb = document.getElementById("honeycomb");
+    honeycomb.remove();
+
+    var honeycombReplacement = document.createElement("canvas");
+    honeycombReplacement.id = "honeycomb";
+    honeycombReplacement.width = 710;
+    honeycombReplacement.height = 740;
+    document.getElementById("honeyStorage").appendChild(honeycombReplacement);
+}
+
+document.getElementById('refresh-map').addEventListener('click', function() {
+    seed = CryptoJS.MD5(new Date().toLocaleTimeString());
+
+    var heatmap = generateHeatmap(seed, width , height)
+    let heatmapCondenced = [];
+
+    heatmap.forEach(element => {
+        element.forEach(height => {
+            heatmapCondenced.push(height);
+        });
+    });
+
+    clearCanvas();
+
+    init(heatmapCondenced);
+    debug(heatmapCondenced.join(','));
+})
+
+document.getElementById('display-text').addEventListener('click', function() {
+
+    var heatmap = generateHeatmap(seed, width , height)
+    let heatmapCondenced = [];
+
+    heatmap.forEach(element => {
+        element.forEach(height => {
+            heatmapCondenced.push(height);
+        });
+    });
+
+    clearCanvas();
+    
+    init(heatmapCondenced, true);
+})
 
 document.addEventListener('DOMContentLoaded', function() {
     /* generate heatmap */
@@ -33,8 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log(heatmapCondenced);
     /* init map generation */
-    image.onload = init(heatmapCondenced);
+    image.onload = init(heatmapCondenced, false);
     image.src = 'assets/tiles.fixed.png';
     /* init debug */
-    debug(heatmapCondenced);
+    debug(heatmapCondenced.join(','));
 });

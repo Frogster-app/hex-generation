@@ -19,9 +19,24 @@ body .tiles, body .map, body .debug, body .heading {
   width: 720px;
   margin: auto;
 }
+body .map .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 body h2 span {
     opacity: 0.5;
     font-size: 20px;
+}
+body .map .title button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+body .map .title button svg {
+    height: 20px;
+    float: right;
 }
 body #sliceImages img {
   width: 50px;
@@ -47,5 +62,17 @@ body .debug p span {
 }
 body .heading p {
     padding-left: 10px;
-    border-left: 2px solid white;
+    border-left: 3px solid #99f375;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+body .map .title button#refresh-map:hover {
+  animation: spin 1s infinite;
 }
