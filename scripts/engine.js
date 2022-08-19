@@ -2,7 +2,7 @@ import { generateHeatmap } from './modules/heatmap.js';
 
 var image = new Image();
 
-const seed = CryptoJS.MD5(Math.random());
+const seed = CryptoJS.MD5(new Date().toLocaleTimeString());
 const width = 15;
 const height = 13;
 
