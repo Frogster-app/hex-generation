@@ -5,7 +5,6 @@ const EDGE_LEN = Math.sin(Math.PI / EDGES) * RADIUS * 2;
 const GRID_Y_SPACE = Math.cos(Math.PI / EDGES) * RADIUS * 2;
 const GRID_X_SPACE = RADIUS * 2 - EDGE_LEN * 0.5;
 const GRID_Y_OFFSET = GRID_Y_SPACE * 0.5;
-const COLS = "#ffffff"
 const rndItem = arr => arr[Math.random() * arr.length | 0];
 const numColsToCut = 38;
 const numRowsToCut = 1;
@@ -34,7 +33,6 @@ function drawGrid(x, y, w, h, points, heatmap) {
     var loop = 0;
     for (gy = y; gy < y + h; gy++) {
         for (gx = x; gx < x + w; gx++) {
-            ctx.strokeStyle = COLS
             drawPoly(gridToPixel(gx, gy, p), points, loop, heatmap);
             loop++;
         }
@@ -62,7 +60,6 @@ function drawPoly(p, points, index, heatmap) {
     ctx.fillText(heatmap[index].toString().substring(0, 5), -12, 1);
     ctx.closePath();
     ctx.fill();
-    ctx.stroke();
 }
 
 function createPoly(sides, points = []) {
