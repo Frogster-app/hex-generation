@@ -25,7 +25,16 @@ body #sliceImages img {
   width: 50px;
   padding: 10px;
 }
+body .tiles img {
+    width: 100%;
+}
 body canvas {
   width: 720px;
   margin: auto;
+}
+
+body .debug, body .tiles {
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 1px solid white;
 }
