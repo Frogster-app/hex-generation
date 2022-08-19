@@ -1,3 +1,4 @@
+/* compiled from style.scss */
 @import "https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap";
 body {
   display: flex;
@@ -5,6 +6,7 @@ body {
   background-color: #333333;
   color: white;
   font-family: 'Nunito', sans-serif;
+  font-weight: 600;
 }
 body a {
   text-decoration: none;
@@ -32,9 +34,22 @@ body canvas {
   width: 720px;
   margin: auto;
 }
-
 body .debug, body .tiles {
     padding-top: 20px;
     margin-top: 20px;
-    border-top: 1px solid white;
+    border-top: 3px solid white;
+}
+body .debug p {
+    font-weight: 700;
+}
+body .debug p span {
+    opacity: 0.5;
+}
+body .heading p {
+    padding-left: 10px;
+    border-left: 2px solid white;
+}
+
+canvas {
+    border: 1px solid white;
 }

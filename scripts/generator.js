@@ -1,22 +1,13 @@
-const EDGES = 6;
-const RADIUS = 30;
-const TAU = 2 * Math.PI;
-const EDGE_LEN = Math.sin(Math.PI / EDGES) * RADIUS * 2;
-const GRID_Y_SPACE = Math.cos(Math.PI / EDGES) * RADIUS * 2;
-const GRID_X_SPACE = RADIUS * 2 - EDGE_LEN * 0.5;
-const GRID_Y_OFFSET = GRID_Y_SPACE * 0.5;
-const rndItem = arr => arr[Math.random() * arr.length | 0];
-const numColsToCut = 38;
-const numRowsToCut = 1;
-const widthOfOnePiece = 221;
-const heightOfOnePiece = 332;
-const ctx = document.getElementById('honeycomb').getContext('2d');
-const P2 = (x, y) => ({
-    x,
-    y
-});
+const RADIUS = 30,
+    EDGE_LEN = 60 * Math.sin(Math.PI / 6),
+    GRID_Y_SPACE = 60 * Math.cos(Math.PI / 6),
+    GRID_X_SPACE = 60 - .5 * EDGE_LEN,
+    GRID_Y_OFFSET = .5 * GRID_Y_SPACE,
+    canvas = document.getElementById("honeycomb"),
+    ctx = canvas.getContext("2d"),
+    P2 = (a, b) => ({x: a,y: b});
 
-function biome(e) {
+function applyBiome(e) {
     // these thresholds will need tuning to match your generator
     if (e < 0.1) return '#d4f1f9';
     else if (e < 0.2) return '#f7e4c7';
@@ -25,7 +16,7 @@ function biome(e) {
     else if (e < 0.7) return '#739a6d';
     else if (e < 0.9) return '#FAD5A5';
     else return '#fffafa';
-}
+};
 
 function drawGrid(x, y, w, h, points, heatmap) {
     const p = P2();
@@ -37,13 +28,13 @@ function drawGrid(x, y, w, h, points, heatmap) {
             loop++;
         }
     }
-}
+};
 
 function gridToPixel(gx, gy, p = {}) {
     p.x = gx * GRID_X_SPACE;
     p.y = gy * GRID_Y_SPACE + (gx % 2 ? GRID_Y_OFFSET : 0);
     return p;
-}
+};
 
 function drawPoly(p, points, index, heatmap) {
 
@@ -56,14 +47,14 @@ function drawPoly(p, points, index, heatmap) {
         ctx.lineTo(p2.x, p2.y);
     }
 
-    ctx.fillStyle = biome(heatmap[index]);
+    ctx.fillStyle = applyBiome(heatmap[index]);
     ctx.fillText(heatmap[index].toString().substring(0, 5), -12, 1);
     ctx.closePath();
     ctx.fill();
-}
+};
 
 function createPoly(sides, points = []) {
-    const step = TAU / sides;
+    const step = (2 * Math.PI) / sides;
     var ang = 0,
         i = sides;
     while (i--) {
@@ -71,9 +62,9 @@ function createPoly(sides, points = []) {
         ang += step;
     }
     return points;
-}
+};
 
 
 function init(heatmap) {
-    drawGrid(1, 1, 15, 13, createPoly(EDGES), heatmap);
-}
+    drawGrid(1, 1, 15, 13, createPoly(6), heatmap);
+};

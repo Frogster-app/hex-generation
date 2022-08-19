@@ -2,19 +2,19 @@ import { generateHeatmap } from './modules/heatmap.js';
 
 var image = new Image();
 
-const seed = -2712858
+const seed = CryptoJS.MD5(Math.random());
 const width = 15;
 const height = 13;
 
 function debug(heatmap) {
     var p = document.createElement('p');
-    p.innerHTML = `seed: ${seed}`;
+    p.innerHTML = `seed: <span>${seed}</span>`;
     document.getElementById('debug').appendChild(p);
 
     /* checksum */
     var hash = CryptoJS.MD5(heatmap);
     var p = document.createElement('p');
-    p.innerHTML = `heatmap checksum(md5): ${hash}`;
+    p.innerHTML = `checksum: <span>${hash}</span>`;
     document.getElementById('debug').appendChild(p);
 
 }
