@@ -1,7 +1,3 @@
-var image = new Image();
-image.onload = init;
-image.src = 'assets/tiles.fixed.png';
-
 const EDGES = 6;
 const RADIUS = 30;
 const TAU = 2 * Math.PI;
@@ -15,7 +11,7 @@ const numColsToCut = 38;
 const numRowsToCut = 1;
 const widthOfOnePiece = 221;
 const heightOfOnePiece = 332;
-const ctx = canvas.getContext('2d');
+const ctx = document.getElementById('honeycomb').getContext('2d');
 const P2 = (x, y) => ({
     x,
     y
@@ -43,20 +39,13 @@ function drawPoly(p, points, imagePieces) {
     ctx.setTransform(0.9, 0, 0, 0.9, p.x, p.y);
     var i = 0;
     ctx.beginPath();
+
     while (i < points.length) {
         const p2 = points[i++];
         ctx.lineTo(p2.x, p2.y);
     }
+
     ctx.closePath();
-
-    /* var img = new Image();
-    img.src = rndItem(imagePieces);
-
-    img.onload = function() {
-        var pattern = ctx.createPattern(img, "no-repeat");
-        ctx.fillStyle = pattern;
-        ctx.fill();
-    } */
     ctx.stroke();
 }
 
