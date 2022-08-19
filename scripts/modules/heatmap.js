@@ -6,7 +6,7 @@ function noise(nx, ny) {
     return gen(nx, ny) / 2 + 0.5;
 }
 
-function generateHeatmap(seed, height, width) {
+function generateHeatmap(seed, width, height) {
 
     Math.seedrandom(seed)
     gen = createNoise2D();
@@ -20,7 +20,6 @@ function generateHeatmap(seed, height, width) {
             value[y][x] = noise(nx, ny, gen);
         }
     }
-
     return value;
 }
 

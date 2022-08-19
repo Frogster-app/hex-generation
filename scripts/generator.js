@@ -14,7 +14,7 @@ function drawGrid(x, y, w, h, points, heatmap, stroke) {
     var loop = 0;
     for (gy = y; gy < y + h; gy++) {
         for (gx = x; gx < x + w; gx++) {
-            drawPoly(gridToPixel(gx, gy, p), points, loop, heatmap, stroke);
+            drawPoly(gridToPixel(gy, gx, p), points, loop, heatmap, stroke);
             loop++;
         }
     }
@@ -44,10 +44,13 @@ function drawPoly(p, points, index, heatmap, stroke) {
     if (stroke == 1) {
         ctx.fill();
     } else if (stroke == 2) {
-        ctx.fillText(applyBiome(heatmap[index])[1], -23, 1);
+        ctx.fillText(applyBiome(heatmap[index])[1], -23, 3);
         ctx.stroke();
     } else if (stroke == 3) {
-        ctx.fillText(heatmap[index].toString().slice(0, 8), -23, 1);
+        ctx.fillText(heatmap[index].toString().slice(0, 8), -23, 3);
+        ctx.stroke();
+    } else if (stroke == 4) {
+        ctx.fillText(index.toString(), -23, 3);
         ctx.stroke();
     }
 };
@@ -64,8 +67,8 @@ function createPoly(sides, points = []) {
 };
 
 
-function init(heatmap, stroke) {
+function init(heatmap, stroke, width, height) {
     canvas = document.getElementById("honeycomb"),
         ctx = canvas.getContext("2d"),
-        drawGrid(1, 1, 15, 13, createPoly(6), heatmap, stroke);
+        drawGrid(1, 1, width, height, createPoly(6), heatmap, stroke);
 };

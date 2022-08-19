@@ -3,8 +3,8 @@ import { generateHeatmap } from './modules/heatmap.js';
 var image = new Image();
 
 let seed = CryptoJS.MD5(new Date().toLocaleTimeString());
-const width = 15;
-const height = 13;
+const width = 12;
+const height = 15;
 
 function debug(heatmap) {
     var p = document.getElementById('seed');
@@ -51,7 +51,7 @@ document.getElementById('refresh-map').addEventListener('click', function() {
 
     clearCanvas();
 
-    init(heatmapCondenced, 1);
+    init(heatmapCondenced, 1, width, height);
     debug(heatmapCondenced.join(','));
 })
 
@@ -59,6 +59,7 @@ document.getElementById('display-text').addEventListener('click', function() {
 
     document.getElementById('display-text').style.display = 'none';
     document.getElementById('display-value').style.display = 'inline-block';
+    document.getElementById('view').innerHTML = '(Biome names)';
 
     var heatmap = generateHeatmap(seed, width, height)
     let heatmapCondenced = [];
@@ -70,14 +71,14 @@ document.getElementById('display-text').addEventListener('click', function() {
     });
 
     clearCanvas();
-
-    init(heatmapCondenced, 2);
+    init(heatmapCondenced, 2, width, height);
 })
 
 document.getElementById('display-value').addEventListener('click', function() {
 
     document.getElementById('display-value').style.display = 'none';
-    document.getElementById('display-layer').style.display = 'inline-block';
+    document.getElementById('display-count').style.display = 'inline-block';
+    document.getElementById('view').innerHTML = '(Matrix values)';
 
     var heatmap = generateHeatmap(seed, width, height)
     let heatmapCondenced = [];
@@ -89,8 +90,45 @@ document.getElementById('display-value').addEventListener('click', function() {
     });
 
     clearCanvas();
+    init(heatmapCondenced, 3, width, height);
+})
 
-    init(heatmapCondenced, 3);
+document.getElementById('display-count').addEventListener('click', function() {
+
+    document.getElementById('display-count').style.display = 'none';
+    document.getElementById('display-terrain').style.display = 'inline-block';
+    document.getElementById('view').innerHTML = '(Poly count)';
+
+    var heatmap = generateHeatmap(seed, width, height)
+    let heatmapCondenced = [];
+
+    heatmap.forEach(element => {
+        element.forEach(height => {
+            heatmapCondenced.push(height);
+        });
+    });
+
+    clearCanvas();
+    init(heatmapCondenced, 4, width, height);
+})
+
+document.getElementById('display-terrain').addEventListener('click', function() {
+
+    document.getElementById('display-terrain').style.display = 'none';
+    document.getElementById('display-layer').style.display = 'inline-block';
+    document.getElementById('view').innerHTML = '(Terrain)';
+
+    var heatmap = generateHeatmap(seed, width, height)
+    let heatmapCondenced = [];
+
+    heatmap.forEach(element => {
+        element.forEach(height => {
+            heatmapCondenced.push(height);
+        });
+    });
+
+    clearCanvas();
+    init(heatmapCondenced, 2, width, height);
 })
 
 document.getElementById('display-layer').addEventListener('click', function() {
@@ -107,9 +145,10 @@ document.getElementById('display-layer').addEventListener('click', function() {
         });
     });
 
-    clearCanvas();
+    document.getElementById('view').innerHTML = '(Biome colors)';
 
-    init(heatmapCondenced, 1);
+    clearCanvas();
+    init(heatmapCondenced, 1, width, height);
 })
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -126,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log(heatmapCondenced);
     /* init map generation */
-    image.onload = init(heatmapCondenced, 1);
+    image.onload = init(heatmapCondenced, 1, width, height);
     image.src = 'assets/tiles.fixed.png';
     /* init debug */
     debug(heatmapCondenced.join(','));
