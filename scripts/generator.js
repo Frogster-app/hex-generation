@@ -17,13 +17,26 @@ const P2 = (x, y) => ({
     y
 });
 
-function drawGrid(x, y, w, h, points, imagePieces) {
+function biome(e) {
+    // these thresholds will need tuning to match your generator
+    if (e < 0.1) return '#d4f1f9';
+    else if (e < 0.2) return '#f7e4c7';
+    else if (e < 0.3) return '#7CFC00';
+    else if (e < 0.5) return '#28a683';
+    else if (e < 0.7) return '#739a6d';
+    else if (e < 0.9) return '#FAD5A5';
+    else return '#fffafa';
+}
+
+function drawGrid(x, y, w, h, points, heatmap) {
     const p = P2();
     var gy, gx;
+    var loop = 0;
     for (gy = y; gy < y + h; gy++) {
         for (gx = x; gx < x + w; gx++) {
             ctx.strokeStyle = COLS
-            drawPoly(gridToPixel(gx, gy, p), points, imagePieces);
+            drawPoly(gridToPixel(gx, gy, p), points, loop, heatmap);
+            loop++;
         }
     }
 }
@@ -34,7 +47,7 @@ function gridToPixel(gx, gy, p = {}) {
     return p;
 }
 
-function drawPoly(p, points, imagePieces) {
+function drawPoly(p, points, index, heatmap) {
 
     ctx.setTransform(0.9, 0, 0, 0.9, p.x, p.y);
     var i = 0;
@@ -45,7 +58,10 @@ function drawPoly(p, points, imagePieces) {
         ctx.lineTo(p2.x, p2.y);
     }
 
+    ctx.fillStyle = biome(heatmap[index]);
+    ctx.fillText(heatmap[index].toString().substring(0, 5), -12, 1);
     ctx.closePath();
+    ctx.fill();
     ctx.stroke();
 }
 
@@ -61,18 +77,6 @@ function createPoly(sides, points = []) {
 }
 
 
-function init() {
-    var imagePieces = [];
-    for (var x = 0; x < numColsToCut; ++x) {
-        for (var y = 0; y < numRowsToCut; ++y) {
-            var canvas = document.createElement('canvas');
-            canvas.width = widthOfOnePiece;
-            canvas.height = heightOfOnePiece;
-            var context = canvas.getContext('2d');
-            context.drawImage(image, x * widthOfOnePiece, y * heightOfOnePiece, widthOfOnePiece, heightOfOnePiece, 0, 0, canvas.width, canvas.height);
-            imagePieces.push(canvas.toDataURL());
-        }
-    }
-
-    drawGrid(1, 1, 15, 13, createPoly(EDGES), imagePieces);
+function init(heatmap) {
+    drawGrid(1, 1, 15, 13, createPoly(EDGES), heatmap);
 }

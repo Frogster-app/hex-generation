@@ -18,12 +18,12 @@
     </div>
 
     <div class="map">
-        <h2>Map</h2>
+        <h2>Honeycomb map <span>(15x13)</span></h2>
         <canvas id="honeycomb" width="720" height="750"></canvas>
     </div>
 
     <div class="tiles">
-        <h2>Tiles</h2>
+        <h2>Tiles <span>(hover for tile name)</span></h2>
         <div id="sliceImages"></div>
     </div>
 
@@ -35,12 +35,13 @@
 
 </body>
 
-<script src="scripts/slice.js"></script>
-
 <script src="scripts/modules/alea.js"></script>
-<script type="module" src="scripts/terrain.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+
+<script src="scripts/slice.js"></script>
 <script src="scripts/generator.js"></script>
-<script src="scripts/engine.js"></script>
+
+<script type="module" src="scripts/engine.js"></script>
 
 </html>

@@ -17,6 +17,10 @@ body .tiles, body .map, body .debug, body .heading {
   width: 720px;
   margin: auto;
 }
+body h2 span {
+    opacity: 0.5;
+    font-size: 20px;
+}
 body #sliceImages img {
   width: 50px;
   padding: 10px;
