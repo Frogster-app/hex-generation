@@ -2,11 +2,21 @@
 <html lang="en">
 
 <head>
+    <title>HexGeneration</title>
+    <link rel="canonical" href="https://hex.frogster.app/">
+
+    <!-- Meta -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HexGeneration</title>
-    <link rel="canonical" href="https://github.com/Frogster-app/HexGeneration">
+    <!-- Social -->
+    <meta property="og:title" content="Hex Generation" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hex.frogster.app/" />
+    <meta property="og:description" content="Hexagon based terrain generation, " />
+    <meta name="theme-color" content="#99f375">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Css -->
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -48,6 +58,10 @@
         <div id="sliceImages"></div>
     </div>
 
+    <footer>
+        ⚡ Powerd by <span>frogster</span>, open-source project on <a href="https://github.com/Frogster-app/HexGeneration">github.</a>
+    </footer>
+
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -56,8 +70,8 @@
 <script src="scripts/data/biomes.js"></script>
 
 <script src="scripts/slice.js"></script>
-<script src="scripts/generator.js"></script>
+<script src="scripts/generation.js"></script>
 
-<script type="module" src="scripts/engine.js"></script>
+<script type="module" src="scripts/app.js"></script>
 
 </html>

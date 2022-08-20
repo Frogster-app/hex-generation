@@ -68,7 +68,7 @@ body .debug,
 body .tiles {
     padding-top: 20px;
     margin-top: 20px;
-    border-top: 3px solid white;
+    border-top: 2px solid rgba(255, 255, 255, 0.531);
 }
 
 body .debug p {
@@ -106,4 +106,22 @@ body .heading p {
 
 body .map .title button#refresh-map:hover {
     animation: spin 1s infinite;
+}
+
+body footer {
+    width: 720px;
+    margin: auto;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.393);
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+body footer span {
+    color: #99f375;
+}
+
+body footer a {
+    border-bottom: 1px solid #99f375;
 }
