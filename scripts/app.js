@@ -3,7 +3,7 @@ import { generateHeatmap } from './modules/heatmap.js';
 var image = new Image();
 
 let seed = CryptoJS.MD5(new Date().toLocaleTimeString());
-const width = 12;
+const width = 13;
 const height = 15;
 
 function debug(heatmap) {
