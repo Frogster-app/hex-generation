@@ -178,11 +178,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    var Inputx = document.getElementById('coordsInputx');
-    Inputx.value = coordX;
-    var Inputy = document.getElementById('coordsInputy');
-    Inputy.value = coordY;
-
     /* init map generation */
     image.onload = init(heatmapCondenced, 1, width, height, finalSeed);
     image.src = 'assets/tiles.fixed.png';
