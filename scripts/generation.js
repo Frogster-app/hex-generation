@@ -61,7 +61,9 @@ function drawPoly(p, points, index, heatmap, stroke) {
         ctx.fillText(heatmap[index].toString().slice(0, 8), -23, 3);
         ctx.stroke();
     } else if (stroke == 4) {
-        ctx.fillText(index.toString(), -23, 3);
+        var background = new Image();
+        background.src = "https://media.discordapp.net/attachments/975338682485727232/1011668298653515846/unknown.png";
+        ctx.drawImage(background, -23, 3,);
         ctx.stroke();
     }
 };

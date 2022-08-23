@@ -1,6 +1,6 @@
 function applyBiome(elevation) {
 
-    if (elevation < 0.1) return ['#f532b2', 'Undefined'];
+    if (elevation < 0.1) return ['#f532b2', 'Undefined', 'base-grass'];
     else if (elevation < 0.2) return ['#8336fd', 'Undefined'];
     else if (elevation < 0.3) return ['#3033fd', 'Undefined'];
     else if (elevation < 0.4) return ['#338efd', 'Undefined'];
