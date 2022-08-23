@@ -1,3 +1,14 @@
+
+/* 
+
+Map generation, this is used to convert noise matrix values into a gui map.
+
+version 1.0.0
+Author: Reece Harris
+Date: 2022 Aug 23
+
+*/
+
 const RADIUS = 30,
     EDGE_LEN = 60 * Math.sin(Math.PI / 6),
     GRID_Y_SPACE = 60 * Math.cos(Math.PI / 6),
@@ -44,7 +55,7 @@ function drawPoly(p, points, index, heatmap, stroke) {
     if (stroke == 1) {
         ctx.fill();
     } else if (stroke == 2) {
-        ctx.fillText(applyBiome(heatmap[index])[1], -23, 3);
+        ctx.fillText(applyBiome(heatmap[index])[1], -23, 3,);
         ctx.stroke();
     } else if (stroke == 3) {
         ctx.fillText(heatmap[index].toString().slice(0, 8), -23, 3);

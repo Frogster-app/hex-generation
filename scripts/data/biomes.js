@@ -1,10 +1,18 @@
-function applyBiome(e) {
-    // these thresholds will need tuning to match your generator
-    if (e < 0.001) return ['#6071e5', 'Deep water'];
-    else if (e < 0.1) return ['#60cfe6', 'Water'];
-    else if (e < 0.55) return ['#60e682', 'Plains'];
-    else if (e < 0.75) return ['#34974D', 'forest'];
-    else if (e < 0.85) return ['#206F33', 'deep forest'];
+function applyBiome(elevation) {
 
-    else return ['#fffafa', 'Undefined'];
+    
+    console.log(elevation)
+
+    if (elevation < 0.1) return ['#f532b2', 'Undefined'];
+    else if (elevation < 0.2) return ['#8336fd', 'Undefined'];
+    else if (elevation < 0.3) return ['#3033fd', 'Undefined'];
+    else if (elevation < 0.4) return ['#338efd', 'Undefined'];
+    else if (elevation < 0.55) return ['#17fcfb', 'Undefined'];
+    else if (elevation < 0.6) return ['#2af989', 'Undefined'];
+    else if (elevation < 0.75) return ['#1ef852', 'Undefined'];
+    else if (elevation < 0.8) return ['#ff6803', 'Undefined'];
+    else if (elevation < 0.9) return ['#f92900', 'Undefined'];
+    else if (elevation < 2) return ['#fffafa', 'Undefined'];
+    else return ['black', 'Undefined'];
+
 };

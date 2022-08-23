@@ -3,8 +3,6 @@
 
 <head>
     <title>HexGeneration</title>
-    <link rel="canonical" href="https://hex.frogster.app/">
-
     <!-- Meta -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,9 +13,9 @@
     <meta property="og:url" content="https://hex.frogster.app/" />
     <meta property="og:description" content="Hexagon based terrain generation, " />
     <meta name="theme-color" content="#99f375">
-    <meta name="twitter:card" content="summary_large_image">
-    <!-- Css -->
+    <!-- Links -->
     <link rel="stylesheet" href="style.css">
+    <link rel="canonical" href="https://hex.frogster.app/">
 </head>
 
 <body>
@@ -31,7 +29,8 @@
         <div class="title">
             <h2>Honeycomb map <span id="view">(Biome colors)</span></h2>
             <div>
-                <!--  -->
+                <div>
+                    <!-- Interactive map buttons -->
                 <button id="display-text" title="Show biome names"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-type"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg></button>
                 <button id="display-layer" title="Show biome colors" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-hexagon"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg></button>
                 <button id="display-value" title="Show heatmap value" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-hash"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg></button>
@@ -39,14 +38,21 @@
                 <button id="display-terrain" title="Show terrain" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></button>
                 <!--  -->
                 <button id="refresh-map"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-ccw"><polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg></button>
+                </div>
+                <!-- Input -->
+                <div class="coords">
+                    <input type="number" id="coordsInputx">
+                    <input type="number" id="coordsInputy">
+                </div>
             </div>
         </div>
-        <canvas id="honeycomb" width="710" height="740"></canvas>
+        <canvas id="honeycomb" width="1755" height="1765"></canvas>
     </div>
 
     <div class="debug">
         <h2>Debug</h2>
         <div id="debug">
+            <p id="coords"></p>
             <p id="seed"></p>
             <p id="checksum"></p>
             <p id="heatmap-matrix">matrix: <button id="heatmap-matrix-btn">view</button></p>
@@ -64,13 +70,26 @@
 
 </body>
 
+<!-- 
+    crypto-js v4.1.1, used to create a checksum for the generation.
+    seedrandom v2.3.10, used make math.random() seedable.
+-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="scripts/modules/alea.js"></script>
+<script src="scripts/modules/seedrandom.js"></script>
+
+<!-- 
+    biomes v1.0.0, used to specify what height each biome is.
+    slice v1.0.0, used to generate the tile slices.
+    generation v1.0.0, used to generate the map.
+-->
 
 <script src="scripts/data/biomes.js"></script>
-
 <script src="scripts/slice.js"></script>
 <script src="scripts/generation.js"></script>
+
+<!-- 
+    script, used to init generation and add interactions to the web page.
+ -->
 
 <script type="module" src="scripts/app.js"></script>
 

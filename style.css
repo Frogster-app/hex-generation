@@ -33,9 +33,37 @@ body .map .title {
     justify-content: space-between;
 }
 
+body .map .title .coords {
+    gap: 10px;
+}
+
+body .map .title .coords input {
+    background-color: transparent;
+    border: none;
+    width: 100px;
+    border-bottom: 2px solid #99f375;
+    color: white;
+    -moz-appearance: textfield;
+}
+
+body .map .title .coords input::after {
+    content: 'e';
+}
+
+body .map .title .coords input::-webkit-outer-spin-button,
+body .map .title .coords input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 body h2 span {
     opacity: 0.5;
     font-size: 20px;
+}
+
+body .map .title > div {
+    display: flex;
+    gap: 10px;
 }
 
 body .map .title button {

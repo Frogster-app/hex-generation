@@ -1,0 +1,24 @@
+{
+  "name": "hexgeneration",
+  "version": "1.0.0",
+  "description": "Hexagon terrain generation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Frogster-app/HexGeneration.git"
+  },
+  "author": "",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Frogster-app/HexGeneration/issues"
+  },
+  "homepage": "https://github.com/Frogster-app/HexGeneration#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "simplex-noise": "^4.0.0"
+  }
+}

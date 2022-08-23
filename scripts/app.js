@@ -2,9 +2,16 @@ import { generateHeatmap } from './modules/heatmap.js';
 
 var image = new Image();
 
-let seed = CryptoJS.MD5(new Date().toLocaleTimeString());
-const width = 13;
-const height = 15;
+let coordX = 1;
+let coordY = 1;
+
+let seed = '28d88adb334a95cb03648ece84f52ebf';
+const width = 13 * 2.5;
+const height = 15 * 2.5;
+
+let finalSeed = CryptoJS.MD5(`${coordX}${seed}${coordY}`);
+
+/* GUI INTERACTIONS */
 
 function debug(heatmap) {
     var p = document.getElementById('seed');
@@ -12,22 +19,27 @@ function debug(heatmap) {
 
     var p = document.getElementById('checksum');
     p.innerHTML = `checksum: <span>${CryptoJS.MD5(heatmap)}</span>`;
+
+    var p = document.getElementById('coords');
+    p.innerHTML = `coords: <span>X:${coordX}, Y:${coordY}</span>`;
 }
 
 function clearCanvas() {
     var honeycomb = document.getElementById("honeycomb");
+    var honeycombHeight = document.getElementById("honeycomb").height;
+    var honeycombWidth = document.getElementById("honeycomb").width;
     honeycomb.remove();
 
     var honeycombReplacement = document.createElement("canvas");
     honeycombReplacement.id = "honeycomb";
-    honeycombReplacement.width = 710;
-    honeycombReplacement.height = 740;
+    honeycombReplacement.width = honeycombWidth;
+    honeycombReplacement.height = honeycombHeight;
     document.getElementById("honeyStorage").appendChild(honeycombReplacement);
 }
 
 document.getElementById('heatmap-matrix-btn').addEventListener('click', function() {
     if (document.getElementById('heatmap-matrix-btn').innerHTML == 'view') {
-        var heatmap = generateHeatmap(seed, width, height)
+        var heatmap = generateHeatmap(finalSeed, width, height)
         document.getElementById('heatmap-matrix').appendChild(document.createElement('pre')).innerHTML = JSON.stringify(heatmap, null, 2);
         document.getElementById('heatmap-matrix-btn').innerHTML = 'hide';
     } else {
@@ -38,9 +50,10 @@ document.getElementById('heatmap-matrix-btn').addEventListener('click', function
 })
 
 document.getElementById('refresh-map').addEventListener('click', function() {
-    seed = CryptoJS.MD5(new Date().toLocaleTimeString());
+    seed = CryptoJS.MD5(new Date().toLocaleTimeString())
+    finalSeed = CryptoJS.MD5(`${coordX}${seed}${coordY}`);
 
-    var heatmap = generateHeatmap(seed, width, height)
+    var heatmap = generateHeatmap(finalSeed, width, height)
     let heatmapCondenced = [];
 
     heatmap.forEach(element => {
@@ -51,7 +64,7 @@ document.getElementById('refresh-map').addEventListener('click', function() {
 
     clearCanvas();
 
-    init(heatmapCondenced, 1, width, height);
+    init(heatmapCondenced, 1, width, height, finalSeed);
     debug(heatmapCondenced.join(','));
 })
 
@@ -61,7 +74,7 @@ document.getElementById('display-text').addEventListener('click', function() {
     document.getElementById('display-value').style.display = 'inline-block';
     document.getElementById('view').innerHTML = '(Biome names)';
 
-    var heatmap = generateHeatmap(seed, width, height)
+    var heatmap = generateHeatmap(finalSeed, width, height)
     let heatmapCondenced = [];
 
     heatmap.forEach(element => {
@@ -71,7 +84,7 @@ document.getElementById('display-text').addEventListener('click', function() {
     });
 
     clearCanvas();
-    init(heatmapCondenced, 2, width, height);
+    init(heatmapCondenced, 2, width, height, finalSeed);
 })
 
 document.getElementById('display-value').addEventListener('click', function() {
@@ -80,7 +93,7 @@ document.getElementById('display-value').addEventListener('click', function() {
     document.getElementById('display-count').style.display = 'inline-block';
     document.getElementById('view').innerHTML = '(Matrix values)';
 
-    var heatmap = generateHeatmap(seed, width, height)
+    var heatmap = generateHeatmap(finalSeed, width, height)
     let heatmapCondenced = [];
 
     heatmap.forEach(element => {
@@ -90,7 +103,7 @@ document.getElementById('display-value').addEventListener('click', function() {
     });
 
     clearCanvas();
-    init(heatmapCondenced, 3, width, height);
+    init(heatmapCondenced, 3, width, height, finalSeed);
 })
 
 document.getElementById('display-count').addEventListener('click', function() {
@@ -99,7 +112,7 @@ document.getElementById('display-count').addEventListener('click', function() {
     document.getElementById('display-terrain').style.display = 'inline-block';
     document.getElementById('view').innerHTML = '(Poly count)';
 
-    var heatmap = generateHeatmap(seed, width, height)
+    var heatmap = generateHeatmap(finalSeed, width, height)
     let heatmapCondenced = [];
 
     heatmap.forEach(element => {
@@ -109,7 +122,7 @@ document.getElementById('display-count').addEventListener('click', function() {
     });
 
     clearCanvas();
-    init(heatmapCondenced, 4, width, height);
+    init(heatmapCondenced, 4, width, height, finalSeed);
 })
 
 document.getElementById('display-terrain').addEventListener('click', function() {
@@ -118,7 +131,7 @@ document.getElementById('display-terrain').addEventListener('click', function() 
     document.getElementById('display-layer').style.display = 'inline-block';
     document.getElementById('view').innerHTML = '(Terrain)';
 
-    var heatmap = generateHeatmap(seed, width, height)
+    var heatmap = generateHeatmap(finalSeed, width, height)
     let heatmapCondenced = [];
 
     heatmap.forEach(element => {
@@ -128,7 +141,7 @@ document.getElementById('display-terrain').addEventListener('click', function() 
     });
 
     clearCanvas();
-    init(heatmapCondenced, 2, width, height);
+    init(heatmapCondenced, 2, width, height, finalSeed);
 })
 
 document.getElementById('display-layer').addEventListener('click', function() {
@@ -136,7 +149,7 @@ document.getElementById('display-layer').addEventListener('click', function() {
     document.getElementById('display-layer').style.display = 'none';
     document.getElementById('display-text').style.display = 'inline-block';
 
-    var heatmap = generateHeatmap(seed, width, height)
+    var heatmap = generateHeatmap(finalSeed, width, height)
     let heatmapCondenced = [];
 
     heatmap.forEach(element => {
@@ -148,12 +161,14 @@ document.getElementById('display-layer').addEventListener('click', function() {
     document.getElementById('view').innerHTML = '(Biome colors)';
 
     clearCanvas();
-    init(heatmapCondenced, 1, width, height);
+    init(heatmapCondenced, 1, width, height, finalSeed);
 })
+
+/* START GENERATION WHEN DOM IS LOADED */
 
 document.addEventListener('DOMContentLoaded', function() {
     /* generate heatmap */
-    var heatmap = generateHeatmap(seed, width, height)
+    var heatmap = generateHeatmap(finalSeed, width, height)
 
     let heatmapCondenced = [];
 
@@ -163,10 +178,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    console.log(heatmapCondenced);
+    var Inputx = document.getElementById('coordsInputx');
+    Inputx.value = coordX;
+    var Inputy = document.getElementById('coordsInputy');
+    Inputy.value = coordY;
+
     /* init map generation */
-    image.onload = init(heatmapCondenced, 1, width, height);
+    image.onload = init(heatmapCondenced, 1, width, height, finalSeed);
     image.src = 'assets/tiles.fixed.png';
     /* init debug */
     debug(heatmapCondenced.join(','));
+    initSlice('assets/tiles.fixed.png', 'sliceImages');
 });
