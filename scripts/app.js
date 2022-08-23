@@ -18,7 +18,7 @@ function debug(heatmap) {
     p.innerHTML = `seed: <span>${seed}</span>`;
 
     var p = document.getElementById('checksum');
-    p.innerHTML = `checksum: <span>${CryptoJS.MD5(heatmap)}</span>`;
+    p.innerHTML = `matrix checksum: <span>${CryptoJS.MD5(heatmap)}</span>`;
 
     var p = document.getElementById('coords');
     p.innerHTML = `coords: <span>X:${coordX}, Y:${coordY}</span>`;
@@ -40,7 +40,7 @@ function clearCanvas() {
 document.getElementById('heatmap-matrix-btn').addEventListener('click', function() {
     if (document.getElementById('heatmap-matrix-btn').innerHTML == 'view') {
         var heatmap = generateHeatmap(finalSeed, width, height)
-        document.getElementById('heatmap-matrix').appendChild(document.createElement('pre')).innerHTML = JSON.stringify(heatmap, null, 2);
+        document.getElementById('heatmap-matrix').appendChild(document.createElement('pre')).innerHTML = JSON.stringify(heatmap, null, 2).toString().replaceAll('[', '<span>[</span>').replaceAll(']', '<span>]</span>').replaceAll(',', '<span>,</span>');
         document.getElementById('heatmap-matrix-btn').innerHTML = 'hide';
     } else {
         document.getElementById('heatmap-matrix').getElementsByTagName('pre')[0].remove();
@@ -49,10 +49,19 @@ document.getElementById('heatmap-matrix-btn').addEventListener('click', function
 
 })
 
+document.getElementById('heatmap-matrix-download').addEventListener('click', function() {
+    var heatmap = generateHeatmap(finalSeed, width, height)
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(heatmap));
+    var dlAnchorElem = document.createElement('a');
+    dlAnchorElem.setAttribute("href",     dataStr     );
+    dlAnchorElem.setAttribute("download", `matrix-${finalSeed}.json`);
+    dlAnchorElem.click();
+})
+
 document.getElementById('download').addEventListener('click', function() {
     var image = document.getElementById("honeycomb").toDataURL();
     var aDownloadLink = document.createElement('a');
-    aDownloadLink.download = 'map-generation-output.png';
+    aDownloadLink.download = `map-${finalSeed}.png`;
     aDownloadLink.href = image;
     aDownloadLink.click();
 })

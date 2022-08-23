@@ -116,6 +116,14 @@ body .debug p button {
 
 body .debug p pre {
     opacity: 0.5;
+    background: #2b2b2b;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+body .debug p pre span {
+    color: #99f375;
+    opacity: 1;
 }
 
 body .heading p {

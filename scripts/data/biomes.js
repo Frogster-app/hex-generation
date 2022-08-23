@@ -1,8 +1,5 @@
 function applyBiome(elevation) {
 
-    
-    console.log(elevation)
-
     if (elevation < 0.1) return ['#f532b2', 'Undefined'];
     else if (elevation < 0.2) return ['#8336fd', 'Undefined'];
     else if (elevation < 0.3) return ['#3033fd', 'Undefined'];
