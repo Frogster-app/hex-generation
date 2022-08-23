@@ -1,4 +1,3 @@
-
 /* 
 
 Noise matrix generation, this uses simplex noise to .
@@ -9,7 +8,7 @@ Date: 2022 Aug 23
 
 */
 
-import { createNoise2D } from '/node_modules/simplex-noise/dist/esm/simplex-noise.js';
+import { createNoise2D } from '../../node_modules/simplex-noise/dist/esm/simplex-noise.js';
 
 let gen;
 
