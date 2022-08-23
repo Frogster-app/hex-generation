@@ -13,7 +13,7 @@ import { createNoise2D } from '/node_modules/simplex-noise/dist/esm/simplex-nois
 
 let gen;
 
-const smoothness = 1.8;
+const smoothness = 1.47;
 
 function noise(nx, ny) {
     return gen(nx, ny) / smoothness + 0.5;

@@ -6,8 +6,8 @@ let coordX = 1;
 let coordY = 1;
 
 let seed = '28d88adb334a95cb03648ece84f52ebf';
-const width = 13 * 2.5;
-const height = 15 * 2.5;
+const width = 13 * 3.5;
+const height = 15 * 3.5;
 
 let finalSeed = CryptoJS.MD5(`${coordX}${seed}${coordY}`);
 
@@ -47,6 +47,14 @@ document.getElementById('heatmap-matrix-btn').addEventListener('click', function
         document.getElementById('heatmap-matrix-btn').innerHTML = 'view';
     }
 
+})
+
+document.getElementById('download').addEventListener('click', function() {
+    var image = document.getElementById("honeycomb").toDataURL();
+    var aDownloadLink = document.createElement('a');
+    aDownloadLink.download = 'map-generation-output.png';
+    aDownloadLink.href = image;
+    aDownloadLink.click();
 })
 
 document.getElementById('refresh-map').addEventListener('click', function() {
