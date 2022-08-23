@@ -1,4 +1,3 @@
-
 /* 
 
 Map generation, this is used to convert noise matrix values into a gui map.
@@ -55,15 +54,18 @@ function drawPoly(p, points, index, heatmap, stroke) {
     if (stroke == 1) {
         ctx.fill();
     } else if (stroke == 2) {
-        ctx.fillText(applyBiome(heatmap[index])[1], -23, 3,);
+        ctx.fillText(applyBiome(heatmap[index])[1], -23, 3, );
         ctx.stroke();
     } else if (stroke == 3) {
         ctx.fillText(heatmap[index].toString().slice(0, 8), -23, 3);
         ctx.stroke();
     } else if (stroke == 4) {
+        ctx.fillText(index, -23, 3);
+        ctx.stroke();
+    } else if (stroke == 5) {
         var background = new Image();
         background.src = "https://media.discordapp.net/attachments/975338682485727232/1011668298653515846/unknown.png";
-        ctx.drawImage(background, -23, 3,);
+        ctx.drawImage(background, -23, 3, );
         ctx.stroke();
     }
 };

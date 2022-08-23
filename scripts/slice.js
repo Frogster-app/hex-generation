@@ -57,5 +57,31 @@ numRowsToCut = 1;
 widthOfOnePiece = 221;
 heightOfOnePiece = 332;
 
+function initSlice(url, div) {
+    var image = new Image();
+    image.onload = cutImageUp;
+    image.src = url;
 
-function initSlice(b,c){var a=new Image;a.onload=function(){for(var f=[],d=0;d<numColsToCut;++d)for(var e=0;e<numRowsToCut;++e){var b=document.createElement("canvas");b.width=widthOfOnePiece,b.height=heightOfOnePiece,b.getContext("2d").drawImage(a,d*widthOfOnePiece,e*heightOfOnePiece,widthOfOnePiece,heightOfOnePiece,0,0,b.width,b.height),f.push(b.toDataURL())}var g=0;f.forEach(function(b){var a=document.createElement("img");a.src=b,a.title=tileNames[g],document.getElementById(c).appendChild(a),g++})},a.src=b}
+    function cutImageUp() {
+        var imagePieces = [];
+        for (var x = 0; x < numColsToCut; ++x) {
+            for (var y = 0; y < numRowsToCut; ++y) {
+                var canvas = document.createElement('canvas');
+                canvas.width = widthOfOnePiece;
+                canvas.height = heightOfOnePiece;
+                var context = canvas.getContext('2d');
+                context.drawImage(image, x * widthOfOnePiece, y * heightOfOnePiece, widthOfOnePiece, heightOfOnePiece, 0, 0, canvas.width, canvas.height);
+                imagePieces.push(canvas.toDataURL());
+            }
+        }
+
+        var loop = 0;
+        imagePieces.forEach(function(imageData) {
+            var anImage = document.createElement('img');
+            anImage.src = imageData;
+            anImage.title = tileNames[loop]
+            document.getElementById(div).appendChild(anImage);
+            loop++;
+        })
+    }
+}

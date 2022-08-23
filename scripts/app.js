@@ -53,7 +53,7 @@ document.getElementById('heatmap-matrix-download').addEventListener('click', fun
     var heatmap = generateHeatmap(finalSeed, width, height)
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(heatmap));
     var dlAnchorElem = document.createElement('a');
-    dlAnchorElem.setAttribute("href",     dataStr     );
+    dlAnchorElem.setAttribute("href", dataStr);
     dlAnchorElem.setAttribute("download", `matrix-${finalSeed}.json`);
     dlAnchorElem.click();
 })
@@ -158,7 +158,7 @@ document.getElementById('display-terrain').addEventListener('click', function() 
     });
 
     clearCanvas();
-    init(heatmapCondenced, 2, width, height, finalSeed);
+    init(heatmapCondenced, 5, width, height, finalSeed);
 })
 
 document.getElementById('display-layer').addEventListener('click', function() {
