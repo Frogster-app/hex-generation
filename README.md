@@ -1,2 +1,2 @@
 # HexGeneration
-Procedural Hexagon terrain and biome generation
+Procedural hexagonal terrain and biome generation
